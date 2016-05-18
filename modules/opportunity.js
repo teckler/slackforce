@@ -28,7 +28,7 @@ function execute(req, res) {
                 fields.push({title: "Link", value: "https://login.salesforce.com/" + opportunity.getId(), short:true});
                 fields.push({title: "Stage", value: opportunity.get("StageName"), short:true});
                 fields.push({title: "Close Date", value: opportunity.get("CloseDate"), short:true});
-                fields.push({title: "Owner", value: opportunity.get("Owner.name"), short:true});
+                fields.push({title: "Owner", value: opportunity.get("Name"), short:true});
                 fields.push({title: "Probability", value: opportunity.get("Probability") + "%", short:true});
                 attachments.push({color: "#555500", fields: fields});
             });
