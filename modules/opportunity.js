@@ -12,7 +12,7 @@ function execute(req, res) {
     var limit = req.body.text;
     if (!limit || limit=="") limit = 5;
 
-    var q = "SELECT Id, Name, format(Amount), Probability, StageName, CloseDate FROM Opportunity where isClosed=false ORDER BY CloseDate ASC LIMIT " + limit;
+    var q = "SELECT Id, Name, format(Amount), Probability, StageName, CloseDate FROM Opportunity where isClosed=false AND CloseDate > TODAY ORDER BY CloseDate ASC LIMIT " + limit;
     org.query({query: q}, function(err, resp) {
         if (err) {
             console.error(err);
