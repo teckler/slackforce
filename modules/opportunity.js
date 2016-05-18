@@ -12,7 +12,7 @@ function execute(req, res) {
     var limit = req.body.text;
     if (!limit || limit=="") limit = 5;
 
-    var q = "SELECT Id, Name, format(Amount), Probability, StageName, CloseDate FROM Opportunity where isClosed=false AND CloseDate > TODAY ORDER BY CloseDate ASC LIMIT " + limit;
+    var q = "SELECT Id, Name, Amount, Probability, StageName, CloseDate, Owner.name FROM Opportunity where isClosed=false AND CloseDate > TODAY ORDER BY CloseDate ASC LIMIT " + limit;
     org.query({query: q}, function(err, resp) {
         if (err) {
             console.error(err);
@@ -28,9 +28,9 @@ function execute(req, res) {
                 fields.push({title: "Link", value: "https://login.salesforce.com/" + opportunity.getId(), short:true});
                 fields.push({title: "Stage", value: opportunity.get("StageName"), short:true});
                 fields.push({title: "Close Date", value: opportunity.get("CloseDate"), short:true});
-                fields.push({title: "Amount", value: new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(opportunity.get("Amount")), short:true});
+                fields.push({title: "Owner", value: opportunity.get("Owner.name"), short:true});
                 fields.push({title: "Probability", value: opportunity.get("Probability") + "%", short:true});
-                attachments.push({color: "#FCB95B", fields: fields});
+                attachments.push({color: "#555500", fields: fields});
             });
             res.json({
                 response_type: "in_channel",
