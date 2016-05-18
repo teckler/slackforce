@@ -9,6 +9,7 @@ org = nforce.createConnection({
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
     redirectUri: 'http://localhost:3000/oauth/_callback',
+    environment: 'sandbox',
     mode: 'single',
     autoRefresh: true
 });
